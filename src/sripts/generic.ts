@@ -47,6 +47,54 @@
 // }
 
 // ---6---
+// class Collection<T extends string | number> {
+//     constructor(private _items: Array<T> = []) {}
+
+//     add(item: T) {
+//         this._items.push(item)
+//     }
+
+//     remove(item: T) {
+//         this._items = this._items.filter((i) => i !== item)
+//     }
+
+//     get items(): Array<T> {
+//         return this._items
+//     }
+// }
+
+// const strings = new Collection<string>(['one', 'two', 'three'])
+// strings.add('four')
+// strings.remove('one')
+
+// const numbers = new Collection<number>([1, 2, 3])
+// numbers.add(4)
+// numbers.remove(1)
+
+// ---7---   
+// interface ICar {
+//     model: string
+//     year: number
+// }
+
+// function createAndValidateCar(model: string, year: number): ICar {
+//     const car: Partial<ICar> = {} // Partial: miss some fields
+
+//     if (model.length > 3) {
+//         car.model = model
+//     }
+
+//     if (year > 2000) {
+//         car.year = year
+//     }
+
+//     return car as ICar
+// }
+
+// ---8---
+
+const cars: Readonly<Array<string>> = ['ford', 'audi'] // with Readonly we can't to change proprieties
+// cars.shift() // we cant't do it
 
 export const genericFunc = () => {
     // ---1---
@@ -70,4 +118,12 @@ export const genericFunc = () => {
     // console.log(getObjectValue(person, 'age'))
 
     // ---6---
+    // console.log(strings.items)
+    // console.log(numbers.items)
+
+    // ---7--- 
+    // console.log(createAndValidateCar('audi', 1995))    
+
+    // ---8---
+    console.log(cars)
 }
