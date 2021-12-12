@@ -1,11 +1,16 @@
 {
     "compilerOptions": {
       "outDir": "./dist/",
-      "noImplicitAny": true,
+      "noImplicitAny": true, //can't use any type
       "module": "es6",
       "target": "es5",
       "jsx": "react",
       "allowJs": true,
-      "moduleResolution": "node"
+      "moduleResolution": "node",
+      "removeComments": true, //remove comments in dist
+      "noEmitOnError": true, //no build with errors
+      "strict": true,
+      "noUnusedLocals": true, //error with unused variables
+      "noImplicitReturns": true //error if func can't finish without return were return require
     }
   }

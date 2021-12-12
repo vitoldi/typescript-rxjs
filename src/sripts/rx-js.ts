@@ -3,16 +3,18 @@ import { delay, fromEvent, Observable, scan, throttleTime, interval, map, filter
 
 export const rxjsFunc = (): void => {
 
-    const btn1: HTMLElement = document.getElementById('btn1')
-    const btn2: HTMLElement = document.getElementById('btn2')
-    const result: HTMLElement = document.getElementById('result')
+    const btn1: HTMLElement | null = document.getElementById('btn1')
+    const btn2: HTMLElement | null = document.getElementById('btn2')
+    const result: HTMLElement | null = document.getElementById('result')
 
 
     // ======================== fromEvent (addEventListener)
+    if (!btn1 || !btn2 || !result) {
+        return
+    }
 
-    fromEvent(btn1, 'click').subscribe(() => result.innerText = 'was clicked btn1')
-    fromEvent(btn2, 'click').subscribe(() => result.innerText = 'was clicked btn2')
-
+    btn1 && result && fromEvent(btn1, 'click').subscribe(() => result.innerText = 'was clicked btn1')
+    btn2 && fromEvent(btn2, 'click').subscribe(() => result.innerText = 'was clicked btn2')
 
     // ========================= pipe, throttleTime, delay, debounceTime
 
