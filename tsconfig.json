@@ -11,6 +11,7 @@
       "noEmitOnError": true, //no build with errors
       "strict": true,
       "noUnusedLocals": true, //error with unused variables
-      "noImplicitReturns": true //error if func can't finish without return were return require
+      "noImplicitReturns": true, //error if func can't finish without return were return require
+      "experimentalDecorators": true
     }
   }
