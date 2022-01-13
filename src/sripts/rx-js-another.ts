@@ -1,4 +1,4 @@
-import { Observable } from "rxjs"
+import { first, map, Observable, of } from "rxjs"
 
 //================ Observable ================
 // Observables are created using new Observable or a creation operator, are subscribed to with an Observer, 
@@ -28,8 +28,43 @@ const observable = new Observable(subscriber => {
 
 // const observable = from(['1', '2', '3']) // equal to example above
 
+// === Creating new operators from scratch ===
+// function delay<T>(delayMillis: number) {
+//     return (observable: Observable<T>) =>
+//         new Observable<T>((subscriber) => {
+//             const allTimerIDs = new Set()
+//             let hasCompleted = false
+//             const subscription = observable.subscribe({
+//                 next(value) {
+//                     const timerID = setTimeout(() => {
+//                         subscriber.next(value)
+//                         allTimerIDs.delete(timerID)
+//                         if (hasCompleted && allTimerIDs.size === 0) {
+//                             subscriber.complete()
+//                         }
+//                     }, delayMillis)
 
+//                     allTimerIDs.add(timerID)
+//                 },
+//                 error(err) {
+//                     subscriber.error(err)
+//                 },
+//                 complete() {
+//                     hasCompleted = true
+//                     if (allTimerIDs.size === 0) {
+//                         subscriber.complete()
+//                     }
+//                 },
+//             })
 
+//             return () => {
+//                 subscription.unsubscribe()
+//                 for (const timerID of allTimerIDs) {
+//                     clearTimeout(timerID)
+//                 }
+//             }
+//         }) 
+// }
 
 export const rxjsAnother = () => {
     //================ Observer ================
@@ -49,4 +84,24 @@ export const rxjsAnother = () => {
     observable.subscribe(observer)
     
     console.log('after Observable finished')
+
+    //================ Operators ================
+    of(1, 2, 3)
+        .pipe(map((x) => x*2))
+        .subscribe((v) => console.log(v)) // 2, 4, 6
+
+    of(1, 2, 3)
+        .pipe(first())
+        .subscribe((v) => console.log(v)) // 1
+
+
+    // === Custom Operator ===   
+    // function discardOddDoubleEven() {
+    //     return pipe(
+    //         filter((v: number) => !(v % 2)),
+    //         map((v) => v + v)
+    //     )
+    // }
+
+    // of(1, 2, 3).pipe(delay(1000)).subscribe(console.log)    
 }
